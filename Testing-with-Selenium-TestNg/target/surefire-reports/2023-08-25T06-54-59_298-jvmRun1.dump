@@ -1,6 +1,6 @@
-# Created at 2021-11-26T11:35:38.384
+# Created at 2023-08-25T06:55:00.019
 org.testng.TestNGException: 
-Cannot find class in classpath: ai.iamneo.testing.Testing_Selenium_TestNg.AppTest.java
+Cannot find class in classpath: ai.iamneo.testing.Testing_Selenium_TestNg.AppTest
 	at org.testng.xml.XmlClass.loadClass(XmlClass.java:75)
 	at org.testng.xml.XmlClass.init(XmlClass.java:67)
 	at org.testng.xml.XmlClass.<init>(XmlClass.java:54)

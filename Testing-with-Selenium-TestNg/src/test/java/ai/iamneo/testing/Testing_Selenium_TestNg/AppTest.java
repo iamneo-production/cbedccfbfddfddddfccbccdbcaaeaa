@@ -1,55 +1,32 @@
-package ai.iamneo.testing.Testing_Selenium_TestNg;
-
-import org.testng.annotations.Test;
-import java.net.URL;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.BeforeTest;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class AppTest {
+  private App app;
 
-	ChromeOptions chromeOptions = new ChromeOptions();
-	WebDriver driver = null;
+  @BeforeMethod
+  public void setup() {
+    app = new App();
+    app.openBrowser("chrome");
+    app.navigateToDroppablePage();
+  }
 
-	@BeforeTest
-	public void beforeTest() throws Exception {
-		
-		driver = new RemoteWebDriver(new URL("http://localhost:4444"), chromeOptions);
-	}
+  @Test
+  public void testDragAndDrop() {
+    app.performDragAndDrop();
+    String expectedColor = "rgba(70, 130, 180, 1)";
+    String actualColor = app.getColor();
+    Assert.assertEquals(actualColor, expectedColor, "Color does not match");
 
-	@Test
-	public void testcase_1() throws InterruptedException 
-{
-		
-		String title = "Get the Title";
-		Assert.assertEquals(title, " ");
-	}
+    String expectedText = "Dropped!";
+    String actualText = app.getText();
+    Assert.assertEquals(actualText, expectedText, "Text does not match");
+  }
 
-	@Test
-	public void testcase_2() throws InterruptedException 
-      {
-	       //write Your Code here to Login
-               
-		 String get = "Dropped or not"; //Get the text of Dropped
-		 Assert.assertEquals(get, " ");
-	}
-	@Test
-	public void testcase_3() throws InterruptedException 
-      {
-	       //write Your Code here to Login
-               
-		 String color = "Get the color"; //Get the Color
-		 Assert.assertEquals(color, " ");
-	}
-
-		
-	@AfterTest
-	public void afterTest() {
-		driver.quit();
-	}
-
+  @AfterMethod
+  public void tearDown() {
+    app.closeBrowser();
+  }
 }
